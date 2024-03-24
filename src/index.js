@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const stats = require("./routes/stats");
+
 // Middleware to parse JSON body
 app.use(express.json());
 
@@ -38,6 +40,8 @@ app.get("/story", (req, res) => {
 
   res.json(data);
 });
+
+app.use("/stats", stats);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
