@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
     {
       title: "Really a Dr?",
       description:
-        "Sam has 3 children under the age of 12 and is on a modest income. Her ex, an questionable Medical Doctor with own practice refuses to pay child support. Sam is seeking funding to resolver her matter and move on.",
+        "Sam has 3 children under the age of 12 and is on a modest income. Her ex, a questionable Medical Doctor with own practice and charged with DV refuses to pay child support. Sam is seeking funding to resolver her matter and move on.",
       assets: [
         {
           type: "House",
@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
       ask: 35000,
       offer: 50000,
       duration: 24,
-      image: "https://via.placeholder.com/150",
+      image: "https://ftx.finance/images/1.jpg",
       tags: ["Wife", "Child Support", "DV"],
     },
   ];
