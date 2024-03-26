@@ -1,14 +1,33 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 // const opportunities = require("./routes/opportunities");
+const clients = require("./routes/clients");
 const stats = require("./routes/stats");
 
 // Middleware to parse JSON body
 app.use(cors());
 app.use(express.json());
+
+const mongoose = require("mongoose");
+const mongoString = process.env.CONNECTION_STRING;
+console.log(mongoString);
+
+mongoose.connect(mongoString);
+const database = mongoose.connection;
+
+database.on("error", (error) => {
+  console.log(error);
+});
+
+database.once("connected", () => {
+  console.log("Database Connected");
+});
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -37,7 +56,7 @@ app.get("/stories", (req, res) => {
       firm: "Men's Legal",
       location: "Brisbane, Australia",
       type: "Family Law",
-      tag: "Legal Support"
+      tag: "Legal Support",
     },
     {
       uid: "2",
@@ -47,7 +66,7 @@ app.get("/stories", (req, res) => {
       firm: "FTX Legal",
       location: "Sydney, Australia",
       type: "Family Law",
-      tag: "Funding"
+      tag: "Funding",
     },
     {
       uid: "3",
@@ -57,8 +76,8 @@ app.get("/stories", (req, res) => {
       firm: "Not disclosed",
       location: "Melbourne, Australia",
       type: "Family Law",
-      tag: "Community Support"
-    }
+      tag: "Community Support",
+    },
   ];
 
   res.json(data);
@@ -94,6 +113,7 @@ app.get("/opportunities", (req, res) => {
 });
 
 // app.use("/opportunities", opportunities);
+app.use("/clients", clients);
 app.use("/stats", stats);
 
 app.listen(PORT, () => {
