@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   const { title, description, firm, location, type, tag } = req.body;
 
-  const newStory = new Story({
+  const data = new Story({
     title,
     description,
     firm,
@@ -20,9 +20,8 @@ router.post("/", async (req, res) => {
     tag,
   });
 
-  const savedStory = await newStory.save();
-
-  res.json(savedStory);
+  const result = await data.save();
+  res.json(result);
 });
 
 module.exports = router;
