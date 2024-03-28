@@ -1,4 +1,4 @@
-# ftc.finance api
+# api.ftx.finance
 
 ## Overview
 
