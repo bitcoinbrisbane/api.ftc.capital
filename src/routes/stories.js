@@ -9,10 +9,9 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { uid, title, description, firm, location, type, tag } = req.body;
+  const { title, description, firm, location, type, tag } = req.body;
 
   const newStory = new Story({
-    uid,
     title,
     description,
     firm,
