@@ -1,10 +1,11 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const PORT = process.env.PORT || 3002;
 const dotenv = require("dotenv");
 
 dotenv.config();
+
+const PORT = process.env.PORT || 3000;
 
 const clients = require("./routes/clients");
 const opportunities = require("./routes/opportunities");
