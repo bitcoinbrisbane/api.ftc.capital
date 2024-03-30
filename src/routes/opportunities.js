@@ -7,6 +7,37 @@ router.get("/", async (req, res) => {
   res.json(data);
 });
 
+router.get("/:id", async (req, res) => {
+  const data = await Opportunity.findById(id);
+  res.json(data);
+});
+
+router.get("/details/:id", async (req, res) => {
+  const data = {
+    title: "Opportunity Title",
+    description: "Opportunity Description",
+    asset_pool: "Asset Pool",
+    ask: "Ask",
+    offer: "Offer",
+    status: "Status",
+    duration: "Duration",
+    image: "Image",
+    revnue: [
+      {
+        date: "2022-01-01",
+        amount: 1000,
+      },
+    ],
+    exppenses: [
+      {
+        date: "2022-01-01",
+        amount: 1000,
+      },
+    ],
+  }
+  res.json(data);
+});
+
 router.post("/", async (req, res) => {
   const data = new Opportunity({
     title: req.body.title,
