@@ -8,11 +8,11 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const data = await Opportunity.findById(id);
+  const data = await Opportunity.findById(req.params.id);
   res.json(data);
 });
 
-router.get("/details/:id", async (req, res) => {
+router.get("/:id/details", async (req, res) => {
   const data = {
     title: "Opportunity Title",
     description: "Opportunity Description",
@@ -22,19 +22,32 @@ router.get("/details/:id", async (req, res) => {
     status: "Status",
     duration: "Duration",
     image: "Image",
-    revnue: [
+    revenue: [
       {
         date: "2022-01-01",
         amount: 1000,
-      },
+        description: "Revenue Description"
+      }
     ],
-    exppenses: [
+    expenses: [
       {
         date: "2022-01-01",
-        amount: 1000,
-      },
-    ],
-  }
+        amount: 3000,
+        description: "Deposit paid"
+      }
+    ]
+  };
+  res.json(data);
+});
+
+router.get("/:id/updates", async (req, res) => {
+  const data = [
+    {
+      date: "2022-01-01",
+      title: "Deposit paid",
+      description: "Client agreement was signed with the firm FTC Legal and the deposit of $3,000 was paid."
+    }
+  ];
   res.json(data);
 });
 
@@ -49,7 +62,7 @@ router.post("/", async (req, res) => {
     duration: req.body.duration,
     image: req.body.image,
     tags: req.body.tags,
-    status: req.body.status,
+    status: req.body.status
   });
 
   const result = await data.save();
