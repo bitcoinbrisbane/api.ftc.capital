@@ -8,15 +8,23 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const data = await Opportunity.findById(req.params.id);
+  let data = await Opportunity.findById(req.params.id);
+
+  if (!data) {
+    data = await Opportunity.findOne({ slug: req.params.id });
+  }
+
+  if (!data) {
+    res.status(404).json({ message: "Opportunity not found" });
+  }
+
   res.json(data);
 });
 
 router.patch("/:id", async (req, res) => {
   const data = await Opportunity.findById(req.params.id);
 
-  if (data){
-
+  if (data) {
     const title = data.title;
     data.slug = title.toLowerCase().replace(/ /g, "-");
 
