@@ -12,6 +12,20 @@ router.get("/:id", async (req, res) => {
   res.json(data);
 });
 
+router.patch("/:id", async (req, res) => {
+  const data = await Opportunity.findById(req.params.id);
+
+  if (data){
+
+    const title = data.title;
+    data.slug = title.toLowerCase().replace(/ /g, "-");
+
+    await data.save();
+  }
+
+  res.json(data);
+});
+
 router.get("/:id/details", async (req, res) => {
   const data = {
     title: "Opportunity Title",
