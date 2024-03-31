@@ -68,6 +68,7 @@ router.get("/:id/updates", async (req, res) => {
 router.post("/", async (req, res) => {
   const data = new Opportunity({
     title: req.body.title,
+    slug: req.body.title.toLowerCase().replace(/ /g, "-"),
     description: req.body.description,
     asset_pool: req.body.asset_pool,
     ask: req.body.ask,
