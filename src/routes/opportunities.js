@@ -26,7 +26,10 @@ router.patch("/:id", async (req, res) => {
 
   if (data) {
     const title = data.title;
-    data.slug = title.toLowerCase().replace(/ /g, "-");
+    let slug = title.toLowerCase().replace(/ /g, "-");
+
+    // remove any special characters
+    slug = slug.replace(/[^\w-]+/g, "");
 
     await data.save();
   }
