@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Opportunity = require("../models/opportunity");
+const Update = require("../models/update");
 
 router.get("/", async (req, res) => {
   const data = await Opportunity.find();
@@ -66,15 +67,24 @@ router.get("/:id/details", async (req, res) => {
 });
 
 router.get("/:id/updates", async (req, res) => {
-  const data = [
-    {
-      date: "2022-01-01",
-      title: "Deposit paid",
-      description: "Client agreement was signed with the firm FTC Legal and the deposit of $3,000 was paid."
-    }
-  ];
+  const data = await Update.find({ opportunity_id: req.params.id });
+
   res.json(data);
 });
+
+router.post("/:id/update", async (req, res) => {
+  const data = new Update({
+    opportunity_id: req.params.id,
+    title: req.body.title,
+    description: req.body.description,
+    date: req.body.date
+  });
+
+  const result = await data.save();
+
+  res.json(result);
+});
+
 
 router.post("/", async (req, res) => {
   const data = new Opportunity({
