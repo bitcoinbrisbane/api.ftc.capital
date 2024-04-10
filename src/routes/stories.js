@@ -12,6 +12,7 @@ router.post("/", async (req, res) => {
   const { title, description, firm, location, type, tag } = req.body;
 
   const data = new Story({
+    client,
     title,
     description,
     firm,

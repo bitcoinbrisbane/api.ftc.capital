@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const storySchema = new mongoose.Schema({
+  client: {
+    required: true,
+    type: String,
+  },
   title: {
     required: true,
     type: String,
